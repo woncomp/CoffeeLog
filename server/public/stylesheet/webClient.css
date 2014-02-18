@@ -1,0 +1,16 @@
+.log-message-info
+{
+	vertical-align: top;
+}
+
+.log-message-warning
+{
+	vertical-align: top;
+	color: #E0Ad4e;
+}
+
+.log-message-danger
+{
+	vertical-align: top;
+	color: #F9534f;
+}

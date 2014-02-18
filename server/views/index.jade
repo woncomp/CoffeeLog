@@ -1,0 +1,94 @@
+doctype html
+mixin categoryWell()
+	.well.well-sm(style="height: 164px")
+		block
+mixin categoryHeader(title)
+	.alert.text-center(class!=attributes.class style="font-size: 28px; padding: 4px")
+		strong= title
+mixin dropdownButton(title)
+	.dropdown
+		button.btn.dropdown-toggle(class!=attributes.class id!=attributes.id style="width: 100%" type="button" data-toggle="dropdown" disabled="disabled")
+			span.pull-left= title
+			span.pull-right.glyphicon.glyphicon-chevron-down
+		block
+
+mixin quickEntryButton(title)
+	button.btn.btn-success.quick-entry-button(style="width:100%" id!=attributes.id disabled="disabled" data-toggle="tooltip" data-placement="top" title="T")
+		.text-left= title
+
+html(lang="en")
+	head
+		title Coffee Log
+		link(rel='stylesheet' href='/lib/bootstrap/css/bootstrap.css')
+		link(rel='stylesheet' href='/stylesheet/webClient.css')
+	body
+		header.navbar.navbar-default.navbar-fixed-top(role='banner')
+			.container
+				.navbar-header
+					span.navbar-brand Coffee Log
+				.collapse.navbar-collapse
+					.nav.navbar-left
+						p.navbar-text#currentSession
+						p.navbar-text.label.label-success.hidden(style="color:white") Online
+						p.navbar-text.label.label-default.hidden(style="color:white") Offline
+					.nav.navbar-right
+						.btn-group
+							button.btn.btn-default(type="button") Log Filter
+							.btn-group(data-toggle="buttons")
+								style(type="text/css").
+									.logFilterRadio
+									{
+										font-family:Lucida Console, Monaco, monospace
+									}
+								label.btn.btn-info#logFilterI
+									input(type="checkbox")
+									div.logFilterRadio I
+								label.btn.btn-warning#logFilterW
+									input(type="checkbox")
+									div.logFilterRadio W
+								label.btn.btn-danger#logFilterE
+									input(type="checkbox")
+									div.logFilterRadio E
+						div(style="display:inline-block; width:20px")
+						button.btn.btn-primary.navbar-btn(type="button") Export
+			hr(style="height:5px; margin:3px")
+			.container
+				.row
+					.col-md-4
+						+categoryWell()
+							+categoryHeader("All Sessions")(class="alert-warning")
+							+dropdownButton("Select Authorization")(class="btn-warning" id="dropdown_authorization")
+								ui.dropdown-menu(style="width: 100%" role="menu" id="list_authorization" aria-labelledby="dropdown_authorization")
+							div(style="height: 4px")
+							+dropdownButton("Select Session")(class="btn-warning" id="dropdown_session")
+								ui.dropdown-menu(style="width: 100%" role="menu" id="list_session" aria-labelledby="dropdown_session")
+					.col-md-8
+						+categoryWell()
+							+categoryHeader('Quick Entries')(class='alert-success')
+							table(style="width:100%")
+								tbody
+									tr
+										td(style="width:30%")
+											+quickEntryButton("-")
+										td(style="width:30%")
+											+quickEntryButton("-")
+										td(style="width:30%")
+											+quickEntryButton("-")
+									tr
+										td(style="width:30%")
+											+quickEntryButton("-")
+										td(style="width:30%")
+											+quickEntryButton("-")
+										td(style="width:33%")
+											+dropdownButton("More")(class="btn-success" id="dropdown_more")
+												ui.dropdown-menu(style="width: 100%" role="menu" id="list_more" aria-labelledby="dropdown_more")
+		div(style="height: 280px")
+		.container
+			.panel.panel-primary
+				.panel-heading MESSAGES
+				.panel-body
+					table#logBox
+	script(src="/lib/jquery/jquery-1.10.1.min.js")
+	script(src="/lib/bootstrap/js/bootstrap.js")
+	script(src="/lib/socket.io/socket.io.js")
+	script(src="javascript/webClient.js")

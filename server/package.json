@@ -1,0 +1,14 @@
+{
+	"name": "CoffeeLog",
+	"version": "0.0.1",
+	"private": true,
+	"dependencies": {
+		"node-static": "*",
+		"jade": "*",
+		"socket.io": "0.9.16"
+	},
+	"comment-dependencies": {
+		"node-static": "*",
+		"dummy": "*"
+	}
+}
